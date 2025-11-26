@@ -1,0 +1,54 @@
+package com.example.coursework2;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.Toast;
+import android.widget.EditText;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import com.example.coursework2.MovieDatabase;
+import com.example.coursework2.MovieDao;
+import com.example.coursework2.MovieEntity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class SearchMovieActivity extends AppCompatActivity {
+
+    private EditText etMovieTitle;
+    private TextView tvMovieDetails;
+
+    private MovieDao movieDao;
+    private static final String API_KEY = "b00d827b";
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_search_movie);
+
+        etMovieTitle = (EditText) findViewById(R.id.etMovieTitle);
+        tvMovieDetails = (TextView) findViewById(R.id.tvMovieDetails);
+        Button btnSearch = (Button) findViewById(R.id.btnSearch);
+
+        movieDao = MovieDatabase.getInstance(this).movieDao();
+
+        btnSearch.setOnClickListener(v -> searcMovie());
+
+    }
+
+    private void searchMovie() {
+        String title = etMovieTitle.getText().toString().trim();
+        if(title.isEmpty()) {
+            Toast.makeText(SearchMovieActivity.this, "Title cannot be empty", Toast.LENGTH_LONG).show();
+        }
+    }
+}
