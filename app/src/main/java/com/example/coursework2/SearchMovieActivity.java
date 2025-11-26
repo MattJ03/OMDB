@@ -41,14 +41,29 @@ public class SearchMovieActivity extends AppCompatActivity {
 
         movieDao = MovieDatabase.getInstance(this).movieDao();
 
-        btnSearch.setOnClickListener(v -> searcMovie());
+        btnSearch.setOnClickListener(v -> searchMovie());
 
     }
 
     private void searchMovie() {
         String title = etMovieTitle.getText().toString().trim();
         if(title.isEmpty()) {
+            etMovieTitle.setError("Please enter a movie title");
             Toast.makeText(SearchMovieActivity.this, "Title cannot be empty", Toast.LENGTH_LONG).show();
+            return;
         }
+
+        String url = "https://www.omdbapi.com/?t=" + title + "&apikey=" + API_KEY;
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                response -> handleApiResponse(response),
+                error -> tvMovieDetails.setText("Error :" + error.toString())
+        );
+        queue.add(request)
     }
 }
