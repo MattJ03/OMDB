@@ -64,6 +64,42 @@ public class SearchMovieActivity extends AppCompatActivity {
                 response -> handleApiResponse(response),
                 error -> tvMovieDetails.setText("Error :" + error.toString())
         );
-        queue.add(request)
+        queue.add(request);
     }
+
+    private void handleApiResponse(JSONObject response) {
+        try {
+            if(response.getString("Response").equals("False")) {
+                tvMovieDetails.setText("Movie Not Found.");
+                return;
+            }
+            String title = response.getString("Title");
+            String year = response.getString("Year");
+            String rated = response.getString("Rated");
+            String released = response.getString("Released");
+            String runtime = response.getString("Runtime");
+            String genre = response.getString("Genre");
+            String director = response.getString("Director");
+            String writer = response.getString("Writer");
+            String actors = response.getString("Actors");
+            String plot = response.getString("Plot");
+
+            String movieDetails =
+                    "Title: " + title + "\n" +
+                    "Year: " + year + "\n" +
+                    "Rated: " + rated + "\n" +
+                    "Released: " + released + "\n" +
+                    "Runtime: " + runtime + "\n" +
+                    "Genre: " + genre + "\n" +
+                    "Director: " + director + "\n" +
+                    "Writer: " + writer + "\n" +
+                    "Actors: " + actors + "\n\n" +
+                    "Plot:\n " + plot;
+
+            tvMovieDetails.setText(movieDetails);
+        } catch(JSONException e) {
+            tvMovieDetails.setText("JSON Error: " + e.getMessage());
+        }
+    }
+
 }
