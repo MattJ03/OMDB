@@ -27,7 +27,7 @@ public class SearchMovieActivity extends AppCompatActivity {
     private TextView tvMovieDetails;
 
     private MovieDao movieDao;
-    private static final String API_KEY = "b00d827b";
+    private static final String API_KEY = ApiConfig.API_KEY;
 
 
     @Override
