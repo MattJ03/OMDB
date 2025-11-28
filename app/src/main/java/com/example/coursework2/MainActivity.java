@@ -32,5 +32,15 @@ public class MainActivity extends AppCompatActivity {
           startActivity(intent);
       });
 
+      advSearch.setOnClickListener(v -> {
+          Intent intent = new Intent(MainActivity.this, AdvancedSearchActivity.class);
+          startActivity(intent);
+      });
+
+      infoBtn.setOnClickListener(v -> {
+          Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+          startActivity(intent);
+      });
+
     }
 }
