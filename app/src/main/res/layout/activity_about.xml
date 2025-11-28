@@ -4,6 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".AboutActivity">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginEnd="23dp"
+        android:text="Movie Explorer is an Android application designed to help users search, discover, and learn more about their favourite films. The app combines local storage with live data from the OMDb API, allowing users to browse movie information quickly and reliably — even when offline.
+
+With Movie Explorer, users can search for movies by title, retrieve detailed information such as release date, runtime, genre, cast, and plot summaries, and store those movies in a local database for future viewing. Users can also look up films by entering part of an actor’s name, or explore multiple matching movie titles and view official posters.
+
+Built entirely in Java using modern Android development practices, Movie Explorer uses the Room persistence library for efficient data storage and the Volley networking library for fast API requests. The app is designed with a clean interface, smooth navigation, and a strong focus on reliability and usability.
+
+Movie Explorer aims to provide a simple yet powerful tool for discovering movies, learning about the people behind them, and building a personalised local film collection."
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="81dp"
+        android:layout_height="68dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginBottom="43dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_dialog_info" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="174dp"
+        android:layout_height="68dp"
+        android:layout_marginBottom="31dp"
+        android:text="Back"
+        android:backgroundTint="@color/orange"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

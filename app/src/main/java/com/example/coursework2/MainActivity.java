@@ -22,7 +22,15 @@ public class MainActivity extends AppCompatActivity {
         advSearch = (Button) findViewById(R.id.btnAdvancedSearch);
         infoBtn = (ImageView) findViewById(R.id.ivInfo);
 
+      mvSearch.setOnClickListener(v -> {
+          Intent intent = new Intent(MainActivity.this, SearchMovieActivity.class);
+          startActivity(intent);
+      });
 
+      acSearch.setOnClickListener(v -> {
+          Intent intent = new Intent(MainActivity.this, ActorSearchActivity.class);
+          startActivity(intent);
+      });
 
     }
 }
