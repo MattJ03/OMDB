@@ -96,6 +96,18 @@ public class SearchMovieActivity extends AppCompatActivity {
                     "Actors: " + actors + "\n\n" +
                     "Plot:\n " + plot;
 
+         MovieEntity movie = new MovieEntity();
+         movie.title = title;
+         movie.year = Integer.parseInt(year);
+         movie.rated = rated;
+         movie.released = released;
+         movie.runtime = Integer.parseInt(runtime.replace(" min", ""));
+         movie.genre = genre;
+         movie.director = director;
+         movie.writer = writer;
+         movie.actors = actors;
+         movie.plot = plot;
+
             tvMovieDetails.setText(movieDetails);
         } catch(JSONException e) {
             tvMovieDetails.setText("JSON Error: " + e.getMessage());
