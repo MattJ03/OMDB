@@ -1,19 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:scrollbars="vertical">
-
+    android:background="@color/black">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:orientation="vertical">
 
-
+        <!-- Search Section -->
         <EditText
             android:id="@+id/etMovieTitle"
             android:layout_width="match_parent"
@@ -21,17 +17,16 @@
             android:hint="Enter movie title"
             android:inputType="text"
             android:padding="12dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="12dp"
             android:background="@android:drawable/edit_text"/>
-
 
         <Button
             android:id="@+id/btnSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Search"
-            android:layout_marginBottom="20dp"
-            android:padding="12dp"/>
+            android:padding="12dp"
+            android:layout_marginBottom="20dp"/>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -44,20 +39,91 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
+                android:orientation="vertical">
+
 
                 <TextView
-                    android:id="@+id/tvMovieDetails"
-                    android:layout_width="359dp"
-                    android:layout_height="273dp"
-                    android:lineSpacingExtra="4dp"
-                    android:padding="4dp"
-                    android:text="Movie details will appear here"
-                    android:textSize="16sp" />
+                    android:id="@+id/tvTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Title"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="4"
+                    android:layout_marginBottom="8dp">
+
+                    <TextView
+                        android:id="@+id/tvYear"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Year"/>
+
+                    <TextView
+                        android:id="@+id/tvRated"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Rated"/>
+
+                    <TextView
+                        android:id="@+id/tvRuntime"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Runtime"/>
+                    <TextView
+                        android:id="@+id/tvReleased"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Released"
+                        />
+
+
+                    <TextView
+                        android:id="@+id/tvGenre"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Genre"/>
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/tvDirector"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Director"/>
+
+                <TextView
+                    android:id="@+id/tvWriter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Writer"/>
+
+                <TextView
+                    android:id="@+id/tvActors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Actors"
+                    android:layout_marginBottom="8dp"/>
+
+
+                <TextView
+                    android:id="@+id/tvPlot"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Plot"
+                    android:lineSpacingExtra="2dp"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
-
-
 </ScrollView>

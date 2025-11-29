@@ -24,7 +24,7 @@ import org.json.JSONObject;
 public class SearchMovieActivity extends AppCompatActivity {
 
     private EditText etMovieTitle;
-    private TextView tvMovieDetails;
+    private TextView tvTitle, tvYear, tvRated, tvReleased, tvRuntime, tvGenre, tvDirector, tvWriter, tvActors, tvPlot;
 
     private MovieDao movieDao;
     private static final String API_KEY = ApiConfig.API_KEY;
@@ -36,7 +36,18 @@ public class SearchMovieActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_movie);
 
         etMovieTitle = (EditText) findViewById(R.id.etMovieTitle);
-        tvMovieDetails = (TextView) findViewById(R.id.tvMovieDetails);
+        tvTitle = findViewById(R.id.tvTitle);
+        tvYear = findViewById(R.id.tvYear);
+        tvRated = findViewById(R.id.tvRated);
+        tvReleased = findViewById(R.id.tvReleased);
+        tvRuntime = findViewById(R.id.tvRuntime);
+        tvGenre = findViewById(R.id.tvGenre);
+        tvDirector = findViewById(R.id.tvDirector);
+        tvWriter = findViewById(R.id.tvWriter);
+        tvActors = findViewById(R.id.tvActors);
+        tvPlot = findViewById(R.id.tvPlot);
+
+
         Button btnSearch = (Button) findViewById(R.id.btnSearch);
 
         movieDao = MovieDatabase.getInstance(this).movieDao();
@@ -53,7 +64,7 @@ public class SearchMovieActivity extends AppCompatActivity {
             return;
         }
 
-        String url = "https://www.omdbapi.com/?t=" + title + "&apikey=" + API_KEY;
+        String url = "https://www.omdbapi.com/?t=" + title.replace(" ", "+") + "&apikey=" + API_KEY;
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -62,7 +73,7 @@ public class SearchMovieActivity extends AppCompatActivity {
                 url,
                 null,
                 response -> handleApiResponse(response),
-                error -> tvMovieDetails.setText("Error :" + error.toString())
+                error -> tvTitle.setText("Error :" + error.toString())
         );
         queue.add(request);
     }
@@ -70,7 +81,7 @@ public class SearchMovieActivity extends AppCompatActivity {
     private void handleApiResponse(JSONObject response) {
         try {
             if(response.getString("Response").equals("False")) {
-                tvMovieDetails.setText("Movie Not Found.");
+                tvTitle.setText("Movie Not Found.");
                 return;
             }
             String title = response.getString("Title");
@@ -84,17 +95,16 @@ public class SearchMovieActivity extends AppCompatActivity {
             String actors = response.getString("Actors");
             String plot = response.getString("Plot");
 
-            String movieDetails =
-                    "Title: " + title + "\n" +
-                    "Year: " + year + "\n" +
-                    "Rated: " + rated + "\n" +
-                    "Released: " + released + "\n" +
-                    "Runtime: " + runtime + "\n" +
-                    "Genre: " + genre + "\n" +
-                    "Director: " + director + "\n" +
-                    "Writer: " + writer + "\n" +
-                    "Actors: " + actors + "\n\n" +
-                    "Plot:\n " + plot;
+            tvTitle.setText(title);
+            tvYear.setText("Year: " + year);
+            tvRated.setText("Rated " + rated);
+            tvReleased.setText("Released: " + released);
+            tvRuntime.setText("Runtime: " + runtime);
+            tvGenre.setText("Genre: " + genre);
+            tvDirector.setText("Director: " + director);
+            tvWriter.setText("Writer: " + writer);
+            tvActors.setText("Actors: " + actors);
+            tvPlot.setText("Plot: " + plot);
 
          MovieEntity movie = new MovieEntity();
          movie.title = title;
@@ -108,9 +118,10 @@ public class SearchMovieActivity extends AppCompatActivity {
          movie.actors = actors;
          movie.plot = plot;
 
-            tvMovieDetails.setText(movieDetails);
+         new Thread(() -> movieDao.insert(movie)).start();
+
         } catch(JSONException e) {
-            tvMovieDetails.setText("JSON Error: " + e.getMessage());
+            tvTitle.setText("JSON Error: " + e.getMessage());
         }
     }
 
