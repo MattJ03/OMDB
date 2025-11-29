@@ -2,6 +2,7 @@ package com.example.coursework2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ public class SearchMovieActivity extends AppCompatActivity {
     private MovieDao movieDao;
     private static final String API_KEY = ApiConfig.API_KEY;
 
+    private ImageView imgBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +48,18 @@ public class SearchMovieActivity extends AppCompatActivity {
         tvWriter = findViewById(R.id.tvWriter);
         tvActors = findViewById(R.id.tvActors);
         tvPlot = findViewById(R.id.tvPlot);
-
+        imgBack = findViewById(R.id.imgBack);
 
         Button btnSearch = (Button) findViewById(R.id.btnSearch);
 
         movieDao = MovieDatabase.getInstance(this).movieDao();
 
         btnSearch.setOnClickListener(v -> searchMovie());
+
+        imgBack.setOnClickListener(v -> {
+            Intent intent = new Intent(SearchMovieActivity.this, MainActivity.class);
+            startActivity(intent);
+        });
 
     }
 
