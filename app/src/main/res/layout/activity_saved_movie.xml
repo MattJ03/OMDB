@@ -42,7 +42,7 @@
             <ListView
                 android:id="@+id/listViewSaved"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="500dp"
                 android:padding="8dp"
                 android:clipToPadding="false"
                 android:divider="@android:color/darker_gray"
