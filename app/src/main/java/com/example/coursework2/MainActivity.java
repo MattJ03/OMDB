@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button mvSearch, acSearch, advSearch;
+    Button mvSearch, acSearch, advSearch, myMovies;
     ImageView infoBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         mvSearch = (Button) findViewById(R.id.btnMovieSearch);
         acSearch = (Button) findViewById(R.id.btnActorSearch);
         advSearch = (Button) findViewById(R.id.btnAdvancedSearch);
+        myMovies = (Button) findViewById(R.id.btnMyMovies);
         infoBtn = (ImageView) findViewById(R.id.ivInfo);
 
       mvSearch.setOnClickListener(v -> {
@@ -35,6 +36,12 @@ public class MainActivity extends AppCompatActivity {
       advSearch.setOnClickListener(v -> {
           Intent intent = new Intent(MainActivity.this, AdvancedSearchActivity.class);
           startActivity(intent);
+      });
+
+      myMovies.setOnClickListener(v -> {
+          Intent intent = new Intent(MainActivity.this, SavedMovieActivity.class);
+          startActivity(intent);
+
       });
 
       infoBtn.setOnClickListener(v -> {
