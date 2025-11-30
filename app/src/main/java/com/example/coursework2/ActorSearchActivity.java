@@ -2,18 +2,24 @@ package com.example.coursework2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ImageView;
+import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ActorSearchActivity extends AppCompatActivity {
 
     private EditText etActorName;
-    private TextView tvActorResults;
+    private ListView lvActorResults;
+    private ImageView imgBack;
     private MovieDao movieDao;
+    private ArrayList<String> actorMovies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,38 +27,46 @@ public class ActorSearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_actor_search);
 
         etActorName = findViewById(R.id.etActorName);
-        tvActorResults = findViewById(R.id.tvActorResults);
+        lvActorResults = findViewById(R.id.lvActorResults);
+        imgBack = findViewById(R.id.imgActorBack);
         Button btnSearch = findViewById(R.id.btnSearchActor);
 
         movieDao = MovieDatabase.getInstance(this).movieDao();
 
         btnSearch.setOnClickListener(v -> searchByActor());
+
+        imgBack.setOnClickListener(v -> finish()); // go back to previous activity
     }
 
     private void searchByActor() {
         String query = etActorName.getText().toString().trim();
-
         if (query.isEmpty()) {
             etActorName.setError("Please enter an actor name");
             return;
         }
 
-        List<MovieEntity> results = movieDao.searchByActor(query);
+        new Thread(() -> {
+            List<MovieEntity> results = movieDao.searchByActor(query);
 
-        if (results.isEmpty()) {
-            tvActorResults.setText("No movies found for: " + query);
-            return;
-        }
+            if (actorMovies == null) {
+                actorMovies = new ArrayList<>();
+            } else {
+                actorMovies.clear();
+            }
 
-        StringBuilder builder = new StringBuilder();
+            for (MovieEntity movie : results) {
+                actorMovies.add(movie.title + " (" + movie.year + ")");
+            }
 
-        for (MovieEntity movie : results) {
-            builder.append("Title: ").append(movie.title).append("\n")
-                    .append("Year: ").append(movie.year).append("\n")
-                    .append("Actors: ").append(movie.actors).append("\n")
-                    .append("Plot: ").append(movie.plot).append("\n\n");
-        }
-
-        tvActorResults.setText(builder.toString());
+            runOnUiThread(() -> {
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                        ActorSearchActivity.this,
+                        R.layout.list_item_movie, // same as SavedMovieActivity
+                        R.id.tvMovieTitle,
+                        actorMovies
+                );
+                lvActorResults.setAdapter(adapter);
+            });
+        }).start();
     }
 }

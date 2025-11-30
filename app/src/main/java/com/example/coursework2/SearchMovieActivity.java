@@ -32,12 +32,16 @@ public class SearchMovieActivity extends AppCompatActivity {
 
     private ImageView imgBack;
 
+    public MovieDao getMovieDao() {
+        return movieDao;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_movie);
 
-        etMovieTitle = (EditText) findViewById(R.id.etMovieTitle);
+        etMovieTitle = (EditText) findViewById(R.id.etActorName);
         tvTitle = findViewById(R.id.tvTitle);
         tvYear = findViewById(R.id.tvYear);
         tvRated = findViewById(R.id.tvRated);
