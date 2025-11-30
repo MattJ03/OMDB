@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Movie;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Button;
@@ -38,6 +39,9 @@ public class SavedMovieActivity extends AppCompatActivity {
 
         loadSavedMovie();
 
+
+
+
         ivBack.setOnClickListener(v -> {
             Intent intent = new Intent(SavedMovieActivity.this, MainActivity.class);
             startActivity(intent);
@@ -47,6 +51,7 @@ public class SavedMovieActivity extends AppCompatActivity {
     private void loadSavedMovie() {
         new Thread(() -> {
             List<MovieEntity> movies = movieDao.getAllMovies();
+            Log.d("SavedMovieActivity", "Movies in DB: " + movies.size());
 
             if(movieTitles == null) {
                 movieTitles = new ArrayList<>();
@@ -55,20 +60,21 @@ public class SavedMovieActivity extends AppCompatActivity {
             }
 
             for(MovieEntity m : movies) {
-                movieTitles.add(m.title + "(" + m.year + ")");
+                movieTitles.add(m.title + " (" + m.year + ")");
             }
 
             runOnUiThread(() -> {
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                  SavedMovieActivity.this,
+                        SavedMovieActivity.this,
                         R.layout.list_item_movie,
                         R.id.tvMovieTitle,
                         movieTitles
                 );
                 listViewSaved.setAdapter(adapter);
             });
-        });
+        }).start();
     }
+
 
 
 }
