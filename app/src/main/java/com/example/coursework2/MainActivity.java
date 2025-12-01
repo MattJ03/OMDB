@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.widget.Button;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -26,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
         advSearch = findViewById(R.id.btnAdvancedSearch);
         myMovies = findViewById(R.id.btnMyMovies);
         infoBtn = findViewById(R.id.ivInfo);
+
+        if(!isInternetAvailable()) {
+            showInternetDialog();
+        }
 
         mvSearch.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SearchMovieActivity.class);
@@ -59,11 +64,16 @@ public class MainActivity extends AppCompatActivity {
         return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
 
-    protected void showDialogForInternet() {
-        AlertDialog dialog = new AlertDialog.Builder(
-                .setTitle("No Internet Connection")
-                .setMessage("Turn on the Internet")
-                .setCancelable(false);
-        );
+    protected void showInternetDialog() {
+         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+         builder.setTitle("No WiFi Connection")
+                 .setMessage("Please enable the WiFi")
+                 .setCancelable(false)
+                 .setPositiveButton("Open Settings ", (dialog, which) -> {
+                     startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                 })
+                 .setNegativeButton("Exit app", ((dialog, which) -> finish())
+                 );
+         builder.show();
     }
 }
