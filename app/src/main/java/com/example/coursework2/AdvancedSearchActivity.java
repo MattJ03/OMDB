@@ -84,8 +84,9 @@ public class AdvancedSearchActivity extends AppCompatActivity {
             }
 
             ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                    this,
-                    android.R.layout.simple_list_item_1,
+                    AdvancedSearchActivity.this,
+                    R.layout.list_item_movie,
+                    R.id.tvMovieTitle,
                     movieTitles
             );
 

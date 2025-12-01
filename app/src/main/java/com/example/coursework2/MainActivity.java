@@ -28,9 +28,7 @@ public class MainActivity extends AppCompatActivity {
         myMovies = findViewById(R.id.btnMyMovies);
         infoBtn = findViewById(R.id.ivInfo);
 
-        if(!isInternetAvailable()) {
-            showInternetDialog();
-        }
+
 
         mvSearch.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SearchMovieActivity.class);
