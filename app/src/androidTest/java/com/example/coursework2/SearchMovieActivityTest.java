@@ -46,7 +46,6 @@ public class SearchMovieActivityTest {
 
     @Test
     public void testBackButtonNavigates() {
-        // Click the back button
         onView(withId(R.id.imgBack)).perform(click());
 
     }

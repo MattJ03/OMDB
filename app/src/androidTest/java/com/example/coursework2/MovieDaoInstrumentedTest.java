@@ -25,7 +25,7 @@ public class MovieDaoInstrumentedTest {
     public void createDb() {
         Context context = ApplicationProvider.getApplicationContext();
         db = Room.inMemoryDatabaseBuilder(context, MovieDatabase.class)
-                .allowMainThreadQueries() // for testing purposes
+                .allowMainThreadQueries()
                 .build();
         dao = db.movieDao();
     }

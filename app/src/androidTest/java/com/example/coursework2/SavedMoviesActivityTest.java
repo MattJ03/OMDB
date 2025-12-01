@@ -30,7 +30,6 @@ public class SavedMoviesActivityTest {
         // Click the back button
         onView(withId(R.id.ivBack2)).perform(click());
 
-        // Optionally, check that the main activity is displayed by verifying a known view
         onView(withId(R.id.btnMovieSearch)).check(matches(isDisplayed()));
     }
 }

@@ -73,6 +73,9 @@ public class SearchMovieActivity extends AppCompatActivity {
             etMovieTitle.setError("Please enter a movie title");
             Toast.makeText(SearchMovieActivity.this, "Title cannot be empty", Toast.LENGTH_LONG).show();
             return;
+        } else if (title.length() > 45) {
+            etMovieTitle.setError("Input too long");
+            Toast.makeText(SearchMovieActivity.this, "Entered search query is too long", Toast.LENGTH_LONG).show();
         }
 
         String url = "https://www.omdbapi.com/?t=" + title.replace(" ", "+") + "&apikey=" + API_KEY;

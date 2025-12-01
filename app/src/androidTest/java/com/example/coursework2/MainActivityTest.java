@@ -21,7 +21,6 @@ public class MainActivityTest {
     @Test
     public void testMovieSearchButtonNavigates() {
         onView(withId(R.id.btnMovieSearch)).perform(click());
-        // Navigation assertion could be added if needed
     }
 
     @Test

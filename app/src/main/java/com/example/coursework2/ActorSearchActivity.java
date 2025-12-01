@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +44,9 @@ public class ActorSearchActivity extends AppCompatActivity {
         if (query.isEmpty()) {
             etActorName.setError("Please enter an actor name");
             return;
+        } else if(query.length() > 45) {
+            etActorName.setError("Input too long");
+            Toast.makeText(ActorSearchActivity.this, "Entered search query is too long", Toast.LENGTH_LONG).show();
         }
 
         new Thread(() -> {
