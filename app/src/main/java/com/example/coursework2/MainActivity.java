@@ -54,7 +54,13 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, AboutActivity.class);
             startActivity(intent);
         });
+
+        if(!isInternetAvailable()) {
+            showInternetDialog();
+        }
     }
+
+
 
     protected boolean isInternetAvailable() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

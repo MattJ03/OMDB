@@ -27,7 +27,6 @@ public class SavedMoviesActivityTest {
 
     @Test
     public void testBackButtonNavigates() {
-        // Click the back button
         onView(withId(R.id.ivBack2)).perform(click());
 
         onView(withId(R.id.btnMovieSearch)).check(matches(isDisplayed()));

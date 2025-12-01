@@ -58,7 +58,7 @@ public class AdvancedSearchActivity extends AppCompatActivity {
         if (query.isEmpty()) {
             etSearchTitle.setError("Enter a movie title");
             return;
-        } else if(query.length() > 45) {
+        } else if(query.length() > 65) {
             etSearchTitle.setError("Input too long");
             Toast.makeText(AdvancedSearchActivity.this, "Entered search query is too long", Toast.LENGTH_LONG).show();
         }

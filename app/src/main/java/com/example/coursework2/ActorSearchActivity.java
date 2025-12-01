@@ -44,7 +44,7 @@ public class ActorSearchActivity extends AppCompatActivity {
         if (query.isEmpty()) {
             etActorName.setError("Please enter an actor name");
             return;
-        } else if(query.length() > 45) {
+        } else if(query.length() > 65) {
             etActorName.setError("Input too long");
             Toast.makeText(ActorSearchActivity.this, "Entered search query is too long", Toast.LENGTH_LONG).show();
         }
