@@ -13,6 +13,17 @@
         android:src="@drawable/img_1"
         android:layout_marginBottom="12dp"/>
 
+    <TextView
+        android:id="@+id/tvActorTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:text="Actor Search"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:paddingBottom="10dp"
+        />
     <EditText
         android:id="@+id/etActorName"
         android:layout_width="match_parent"

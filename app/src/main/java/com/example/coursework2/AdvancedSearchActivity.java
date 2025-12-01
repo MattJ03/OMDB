@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.*;
 import com.android.volley.Request;
@@ -20,7 +22,7 @@ public class AdvancedSearchActivity extends AppCompatActivity {
 
     private EditText etSearchTitle;
     private ListView listViewResults;
-    private ImageView imgPoster;
+    private ImageView imgPoster, imgBack;
     private final ArrayList<String> movieTitles = new ArrayList<>();
     private final ArrayList<String> imdbIds = new ArrayList<>();
 
@@ -33,6 +35,7 @@ public class AdvancedSearchActivity extends AppCompatActivity {
 
         etSearchTitle = (EditText) findViewById(R.id.etSearchTitle);
         listViewResults = (ListView) findViewById(R.id.listViewResults);
+        imgBack = (ImageView) findViewById(R.id.imgAdvBack);
         imgPoster = (ImageView) findViewById(R.id.imgPoster);
 
         Button btnSearch = findViewById(R.id.btnAdvancedSearch);
@@ -41,6 +44,11 @@ public class AdvancedSearchActivity extends AppCompatActivity {
         listViewResults.setOnItemClickListener((parent, view, position, id) -> {
             String imdbID = imdbIds.get(position);
             loadPoster(imdbID);
+        });
+
+        imgBack.setOnClickListener(v -> {
+            Intent intent = new Intent(AdvancedSearchActivity.this, MainActivity.class);
+            startActivity(intent);
         });
     }
 
